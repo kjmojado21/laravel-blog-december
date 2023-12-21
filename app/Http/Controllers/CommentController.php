@@ -70,8 +70,10 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
         //
+        $this->comment->destroy($id);
+        return redirect()->back();
     }
 }
