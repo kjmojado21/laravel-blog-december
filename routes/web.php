@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::get('/post',[PostController::class,'create'])->name('post.create');
     Route::post('/store',[PostController::class,'store'])->name('post.store');
+    Route::get('/edit/{id}',[PostController::class,'edit'])->name('post.edit');
+    Route::patch('/update/{id}',[PostController::class,'update'])->name('post.update');
+    Route::get('/show/{id}',[PostController::class,'show'])->name('post.show');
+    Route::delete('/delete/{id}',[PostController::class,'destroy'])->name('post.destroy');
 
+    #comment
+    Route::post('/comment/store/{id}',[CommentController::class,'store'])->name('comment.store');
 
 });

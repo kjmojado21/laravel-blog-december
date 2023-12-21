@@ -45,4 +45,32 @@ class PostController extends Controller
 
         return $image_name;
     }
+
+    public function edit($id){
+        $post = $this->post->findOrFail($id);
+
+        return view('post.edit')->with('post',$post);
+    }
+    public function update($id, Request $request){
+        $post = $this->post->findOrFail($id);
+
+        $post->title = $request->title;
+        $post->description = $request->description;
+        if($request->image){
+            $post->image = $this->saveImage($request);
+        }
+        $post->save();
+
+        return redirect()->route('post.show',$id);
+    }
+    public function show($id){
+        $post = $this->post->findOrFail($id);
+
+        return view('post.show')->with('post',$post);
+    }
+    public function destroy($id){
+        $this->post->destroy($id);
+
+        return redirect()->route('index');
+    }
 }
