@@ -26,6 +26,8 @@
 
                     {{ $comment->body }}
                     <form action="{{ route('comment.destroy', $comment->id) }}" method="post" class="d-inline">
+                       @csrf
+                       @method('DELETE')
                         @if ($comment->user_id == Auth::user()->id)
                             <button type="submit" class="btn btn-danger float-end">
                                 <i class="fa-solid fa-trash"></i>
